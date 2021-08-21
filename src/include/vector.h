@@ -13,4 +13,9 @@ public:
 	Vec2Df(float new_x, float new_y) : x(new_x), y(new_y) {}
 
 	void normalize();
+	void lerp(Vec2Df *target, float amount);
+
+	inline float length() {
+		return sqrtf(x * x + y * y);
+	}
 };

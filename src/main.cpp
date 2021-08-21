@@ -1,8 +1,10 @@
 #include <3ds.h>
 #include <citro2d.h>
 #include <cstdio>
-#include <vector>
+#include <cmath>
 #include "actors/actor.h"
+#include "actors/player.h"
+#include "include/input.h"
 #include "include/vector.h"
 
 circlePosition cur_circle;
@@ -22,11 +24,20 @@ bool detect_box(float x1, float y1, float w1, float h1,
 
 void Vec2Df::normalize() {
 	// If the vector is null do not normalize it. (Divide by 0 error)
-	if (x == 0 && y == 0)
+	if (x == 0.0f && y == 0.0f)
 		return;
-	float divisor = sqrtf(x * x + y * y);
+	float divisor = length();
 	x /= divisor;
 	y /= divisor;
+}
+
+void Vec2Df::lerp(Vec2Df *target, float amount) {
+	Vec2Df distance(target->x - x, target->y - y);
+	distance.normalize();
+	distance.x *= amount;
+	distance.y *= amount;
+	x += distance.x;
+	y += distance.y;
 }
 
 int main() {
@@ -49,12 +60,7 @@ int main() {
 
 	// Main loop
 	while (aptMainLoop()) {
-
-		// Read Input
-		hidScanInput();
-		hidCircleRead(&cur_circle);
-		new_keys = hidKeysDown();
-		cur_keys = hidKeysHeld();
+		update_inputs();
 
 		for (const auto& cur_actor : actors) {
 			cur_actor->logic();

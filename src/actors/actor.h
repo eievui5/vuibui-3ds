@@ -4,7 +4,7 @@
 #include <citro2d.h>
 #include <vector>
 
-enum class ActorType {NONE, PLAYER, ENEMY};
+enum class ActorType {NONE = 0, PLAYER = 1, ENEMY = 2};
 
 class Actor {
 public:
@@ -17,14 +17,7 @@ public:
 
 	virtual void logic() {};
 	void render();
-	Actor* detect_actor(ActorType type);
-};
-
-class Player : public Actor {
-public:
-
-	Player();
-	void logic();
+	Actor* detect_actor(ActorType type = ActorType::NONE);
 };
 
 class Enemy : public Actor {
