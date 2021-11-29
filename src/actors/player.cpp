@@ -1,6 +1,8 @@
-#include "include/input.h"
-#include "include/vector.h"
-#include "player.h"
+#include <cstdio>
+
+#include "include/input.hpp"
+#include "include/vector.hpp"
+#include "player.hpp"
 
 Player::Player() {
 	y = 80.0f;
@@ -9,7 +11,7 @@ Player::Player() {
 
 void Player::logic() {
 	// Calculate input direction.
-	Vec2Df input_direction;
+	Vector2Df input_direction;
 	// The circle pad takes priority over the D-Pad.
 	if (cur_circle.dx != 0 || cur_circle.dy != 0) {
 		input_direction.x = cur_circle.dx / 150.0f;
@@ -33,11 +35,11 @@ void Player::logic() {
 
 	if (new_keys & KEY_A) {
 		if (detect_actor(ActorType::ENEMY)) {
-			printf("Found Enemy!\n");
+			std::printf("Found Enemy!\n");
 		} else if (detect_actor()) {
-			printf("Found Actor!\n");
+			std::printf("Found Actor!\n");
 		} else {
-			printf("Found none.\n");
+			std::printf("Found none.\n");
 		}
 	}
 }

@@ -1,9 +1,10 @@
 #include <3ds.h>
 #include <citro2d.h>
-#include "actors/actor.h"
-#include "include/vector.h"
 
-std::vector <Actor*> actors;
+#include "actors/actor.hpp"
+#include "include/vector.hpp"
+
+std::vector <uptr<Actor>> actors;
 
 void Actor::render() {
 	sprite.params.pos.x = x;
@@ -12,19 +13,14 @@ void Actor::render() {
 }
 
 Actor* Actor::detect_actor(ActorType type) {
-	for (auto& cur_actor : actors) {
-		if (cur_actor == this)
+	for (auto& i : actors) {
+		if (i.get() == this)
 			continue;
-		if (detect_box(x, y, width, height, cur_actor->x, cur_actor->y,
-			       cur_actor->width, cur_actor->height) && 
-		    (cur_actor->type == type || type == ActorType::NONE))
-			return cur_actor;
+		if (detect_overlap(x, y, width, height, i->x, i->y,i->width, i->height)
+			&& (i->type == type || type == ActorType::NONE))
+			return i.get();
 	}
-	return NULL;
-}
-
-Enemy::Enemy() {
-	type = ActorType::ENEMY;
+	return nullptr;
 }
 
 void Enemy::logic() {

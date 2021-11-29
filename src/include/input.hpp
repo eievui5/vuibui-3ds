@@ -4,8 +4,8 @@
 #include <cmath>
 
 extern circlePosition cur_circle;
-extern uint cur_keys;
-extern uint new_keys;
+extern u32 cur_keys;
+extern u32 new_keys;
 
 inline void update_inputs() {
 	// Read Input

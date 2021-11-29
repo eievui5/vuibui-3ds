@@ -4,14 +4,14 @@
 #include <citro2d.h>
 #include <vector>
 
-enum class ActorType {NONE = 0, PLAYER = 1, ENEMY = 2};
+enum class ActorType {NONE = 0, PLAYER, ENEMY};
 
 class Actor {
 public:
-	float x = 50.0f;
-	float y = 50.0f;
-	float width = 8.0f;
-	float height = 8.0f;
+	f32 x = 50.0f;
+	f32 y = 50.0f;
+	f32 width = 8.0f;
+	f32 height = 8.0f;
 	ActorType type = ActorType::NONE;
 	C2D_Sprite sprite;
 
@@ -22,8 +22,8 @@ public:
 
 class Enemy : public Actor {
 public:
-	Enemy();
+	Enemy() { type = ActorType::ENEMY; };
 	void logic();
 };
 
-extern std::vector <Actor*> actors;
+extern std::vector <uptr<Actor>> actors;

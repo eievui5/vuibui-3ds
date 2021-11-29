@@ -1,14 +1,14 @@
 #include <3ds.h>
 #include <citro2d.h>
 #include <cmath>
-#include "actors/actor.h"
-#include "actors/player.h"
-#include "include/input.h"
-#include "include/vector.h"
+#include "actors/actor.hpp"
+#include "actors/player.hpp"
+#include "include/input.hpp"
+#include "include/vector.hpp"
 
 circlePosition cur_circle;
-uint cur_keys;
-uint new_keys;
+u32 cur_keys;
+u32 new_keys;
 
 int main() {
 	romfsInit();
@@ -17,11 +17,11 @@ int main() {
 	C2D_Init(C2D_DEFAULT_MAX_OBJECTS);
 	C2D_Prepare();
 	C3D_RenderTarget* top = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT);
-	consoleInit(GFX_BOTTOM, NULL);
+	consoleInit(GFX_BOTTOM, nullptr);
 
-	actors.push_back(new Player);
-	actors.push_back(new Enemy);
-	actors.push_back(new Actor);
+	actors.emplace_back(new Player);
+	actors.emplace_back(new Enemy);
+	actors.emplace_back(new Actor);
 
 	C2D_SpriteSheet luvui_sheet = C2D_SpriteSheetLoad("romfs:/gfx/luvui.t3x");
 	for (auto& cur_actor : actors) {
