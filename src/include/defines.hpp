@@ -1,6 +1,8 @@
 #pragma once
 
 // Global definitions
+// This file is automatically included in every translation unit and aliases
+// common type names to make them more terse.
 
 #include <cstdint>
 #include <memory>
@@ -18,4 +20,4 @@ using i64 = std::int64_t;
 using f32 = float;
 using f64 = double;
 
-template<typename T> using uptr = std::unique_ptr<T>;
+template <typename T> using uptr = std::unique_ptr<T>;

@@ -1,13 +1,8 @@
 #include <cstdio>
 
-#include "include/input.hpp"
-#include "include/vector.hpp"
+#include "input.hpp"
 #include "player.hpp"
-
-Player::Player() {
-	y = 80.0f;
-	type = ActorType::PLAYER;
-}
+#include "vector.hpp"
 
 void Player::logic() {
 	// Calculate input direction.
@@ -25,7 +20,7 @@ void Player::logic() {
 		if (cur_keys & KEY_DRIGHT) {
 			input_direction.x = 1.0f;
 		} else if (cur_keys & KEY_DLEFT) {
-			input_direction.x = - 1.0f;
+			input_direction.x = -1.0f;
 		}
 		input_direction.normalize();
 	}

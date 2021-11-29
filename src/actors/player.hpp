@@ -1,11 +1,16 @@
 #pragma once
 
 #include "actor.hpp"
-#include "include/vector.hpp"
+#include "vector.hpp"
 
 class Player : public Actor {
-public:
+  public:
 	Vector2Df velocity = {0.0f, 0.0f};
-	Player();
+
+	Player() {
+		y = 80.0f;
+		type = ActorType::PLAYER;
+	}
+
 	void logic();
 };

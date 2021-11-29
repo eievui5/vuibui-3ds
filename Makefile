@@ -35,7 +35,7 @@ TARGET		:=	bin/$(notdir $(CURDIR))
 BUILD		:=	obj
 SOURCES		:=	src src/actors src/types
 DATA		:=	src/data
-INCLUDES	:=	src
+INCLUDES	:=	src src/include
 GRAPHICS	:=	src/gfx
 ROMFS		:=	src/romfs
 GFXBUILD	:=	src/romfs/gfx
@@ -51,7 +51,7 @@ CFLAGS	:=	-g -Wall -O3 -mword-relocations \
 
 CFLAGS	+=	$(INCLUDE) -D__3DS__
 
-CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11 -include "include/defines.hpp"
+CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++17 -include "include/defines.hpp"
 
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
