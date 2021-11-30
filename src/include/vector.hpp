@@ -11,16 +11,27 @@ template <typename T> class Vector2D {
 	Vector2D() {}
 	Vector2D(T new_x, T new_y) : x(new_x), y(new_y) {}
 
+	// Vector operators. == is omitted because it should be avoided for vectors.
+	inline Vector2D<T> operator+(Vector2D<T> rhs) { return {x + rhs.x, y + rhs.y}; }
+	inline Vector2D<T> operator-(Vector2D<T> rhs) { return {x - rhs.x, y - rhs.y}; }
+	inline Vector2D<T> operator*(T rhs) { return {x * rhs, y * rhs}; }
+	inline Vector2D<T> operator/(T rhs) { return {x / rhs, y / rhs}; }
+	inline void operator=(Vector2D<T> rhs) { x = rhs.x, y = rhs.y; }
+	inline void operator+=(Vector2D<T> rhs) { x += rhs.x, y += rhs.y; }
+	inline void operator-=(Vector2D<T> rhs) { x -= rhs.x, y -= rhs.y; }
+	inline void operator*=(T rhs) { x *= rhs, y *= rhs; }
+	inline void operator/=(T rhs) { x /= rhs, y /= rhs; }
+
 	void normalize() {
 		// If the vector is null do not normalize it. (Divide by 0 error)
 		if (x == 0.0f && y == 0.0f)
 			return;
-		float divisor = length();
+		f32 divisor = length();
 		x /= divisor;
 		y /= divisor;
 	}
 
-	void lerp(Vector2D* target, float amount) {
+	void lerp(Vector2D* target, f32 amount) {
 		Vector2D<T> distance(target->x - x, target->y - y);
 		distance.normalize();
 		distance.x *= amount;
@@ -29,10 +40,10 @@ template <typename T> class Vector2D {
 		y += distance.y;
 	}
 
-	inline float length() { return std::sqrt(x * x + y * y); }
+	inline f32 length() { return std::sqrt(x * x + y * y); }
 };
 
-using Vector2Df = Vector2D<float>;
+using Vector2Df = Vector2D<f32>;
 
 // Detect if two boxes overlap. Width and height are treated as radii centered
 // on the x and y.

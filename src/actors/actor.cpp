@@ -7,12 +7,11 @@
 std::vector<uptr<Actor>> actors;
 
 // Detect overlap with another actor by comparing positions, width, and height.
-Actor* Actor::detect_actor(ActorType type) {
+Actor* Actor::detect_actor() {
 	for (auto& i : actors) {
 		if (i.get() == this)
 			continue;
-		if (detect_overlap(x, y, width, height, i->x, i->y, i->width, i->height)
-			&& (i->type == type || type == ActorType::NONE))
+		if (detect_overlap(x, y, w, h, i->x, i->y, i->w, i->h))
 			return i.get();
 	}
 	return nullptr;

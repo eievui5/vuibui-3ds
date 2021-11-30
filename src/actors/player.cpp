@@ -29,9 +29,7 @@ void Player::logic() {
 	y -= input_direction.y * 1.5f;
 
 	if (new_keys & KEY_A) {
-		if (detect_actor(ActorType::ENEMY)) {
-			std::printf("Found Enemy!\n");
-		} else if (detect_actor()) {
+		if (detect_actor()) {
 			std::printf("Found Actor!\n");
 		} else {
 			std::printf("Found none.\n");

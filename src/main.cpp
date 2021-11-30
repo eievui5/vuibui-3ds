@@ -18,9 +18,9 @@ int main() {
 	consoleInit(GFX_BOTTOM, nullptr);
 
 	// Construct 3 debug actors.
-	actors.emplace_back(new Player);
-	actors.emplace_back(new Enemy);
-	actors.emplace_back(new Actor);
+	actors.emplace_back(new Player{16.0f, 80.0f, 8.0f, 8.0f});
+	actors.emplace_back(new Enemy{16.0f, 16.0f, 8.0f, 8.0f});
+	actors.emplace_back(new Actor{16.0f, 16.0f, 8.0f, 8.0f});
 
 	// Assign a sprite to each actor using a sprite sheet from romfs.
 	C2D_SpriteSheet luvui_sheet = C2D_SpriteSheetLoad("romfs:/gfx/luvui.t3x");
