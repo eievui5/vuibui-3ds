@@ -51,9 +51,6 @@ class Enemy : public Actor {
 		Vector2Df direction = {actors[0]->x - x, actors[0]->y - y};
 		direction.normalize();
 		direction *= 0.5f;
-		direction += Vector2Df(0.0f, 0.0f) - Vector2Df(1.0f, 5.0f);
-		Vector2D<u8> integer_vector{(u8) direction.x, (u8) direction.y};
-		direction *= integer_vector.x;
 		x += direction.x;
 		y += direction.y;
 	}
