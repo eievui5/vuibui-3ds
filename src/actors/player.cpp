@@ -1,4 +1,4 @@
-#include <cstdio>
+#include <stdio.h>
 
 #include "input.hpp"
 #include "player.hpp"
@@ -25,14 +25,14 @@ void Player::logic() {
 		input_direction.normalize();
 	}
 
-	x += input_direction.x * 1.5f;
-	y -= input_direction.y * 1.5f;
+	position.x += input_direction.x * 1.5f;
+	position.y -= input_direction.y * 1.5f;
 
 	if (new_keys & KEY_A) {
 		if (detect_actor()) {
-			std::printf("Found Actor!\n");
+			puts("Found actor.");
 		} else {
-			std::printf("Found none.\n");
+			puts("Found none.");
 		}
 	}
 }

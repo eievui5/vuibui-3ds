@@ -16,9 +16,9 @@ template <typename T> class Vector2D {
 	inline Vector2D<T> operator-(Vector2D<T> rhs) { return {x - rhs.x, y - rhs.y}; }
 	inline Vector2D<T> operator*(T rhs) { return {x * rhs, y * rhs}; }
 	inline Vector2D<T> operator/(T rhs) { return {x / rhs, y / rhs}; }
-	inline void operator=(Vector2D<T> rhs) { x = rhs.x, y = rhs.y; }
-	inline void operator+=(Vector2D<T> rhs) { x += rhs.x, y += rhs.y; }
-	inline void operator-=(Vector2D<T> rhs) { x -= rhs.x, y -= rhs.y; }
+	inline void operator=(Vector2D<T>& rhs) { x = rhs.x, y = rhs.y; }
+	inline void operator+=(Vector2D<T>& rhs) { x += rhs.x, y += rhs.y; }
+	inline void operator-=(Vector2D<T>& rhs) { x -= rhs.x, y -= rhs.y; }
 	inline void operator*=(T rhs) { x *= rhs, y *= rhs; }
 	inline void operator/=(T rhs) { x /= rhs, y /= rhs; }
 

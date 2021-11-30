@@ -1,10 +1,12 @@
+#include <3ds.h>
+#include <citro2d.h>
+#include <cmath>
+#include <stdio.h>
+
 #include "actors/actor.hpp"
 #include "actors/player.hpp"
 #include "input.hpp"
 #include "vector.hpp"
-#include <3ds.h>
-#include <citro2d.h>
-#include <cmath>
 
 int main() {
 	// Initiallize the 3DS for rendering and file access.
@@ -19,7 +21,7 @@ int main() {
 
 	// Construct 3 debug actors.
 	actors.emplace_back(new Player{16.0f, 80.0f, 8.0f, 8.0f});
-	actors.emplace_back(new Enemy{16.0f, 16.0f, 8.0f, 8.0f});
+	actors.emplace_back(new Enemy);
 	actors.emplace_back(new Actor{16.0f, 16.0f, 8.0f, 8.0f});
 
 	// Assign a sprite to each actor using a sprite sheet from romfs.
@@ -33,6 +35,11 @@ int main() {
 	while (aptMainLoop()) {
 		// Poll 3DS inputs for this frame.
 		update_inputs();
+
+		if (new_keys & KEY_ZR) {
+			show_collision ^= true;
+			printf("Toggled visible collision %s.\n", show_collision ? "on" : "off");
+		}
 
 		// Run each actor's frame logic function.
 		for (const auto& cur_actor : actors) {

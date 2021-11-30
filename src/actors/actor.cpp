@@ -11,7 +11,7 @@ Actor* Actor::detect_actor() {
 	for (auto& i : actors) {
 		if (i.get() == this)
 			continue;
-		if (detect_overlap(x, y, w, h, i->x, i->y, i->w, i->h))
+		if (detect_overlap(position.x, position.y, width, height, i->position.x, i->position.y, i->width, i->height))
 			return i.get();
 	}
 	return nullptr;
