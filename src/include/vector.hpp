@@ -12,15 +12,15 @@ template <typename T> class Vector2D {
 	Vector2D(T new_x, T new_y) : x(new_x), y(new_y) {}
 
 	// Vector operators. == is omitted because it should be avoided for vectors.
-	inline Vector2D<T> operator+(Vector2D<T> rhs) { return {x + rhs.x, y + rhs.y}; }
-	inline Vector2D<T> operator-(Vector2D<T> rhs) { return {x - rhs.x, y - rhs.y}; }
-	inline Vector2D<T> operator*(T rhs) { return {x * rhs, y * rhs}; }
-	inline Vector2D<T> operator/(T rhs) { return {x / rhs, y / rhs}; }
-	inline void operator=(Vector2D<T>& rhs) { x = rhs.x, y = rhs.y; }
-	inline void operator+=(Vector2D<T>& rhs) { x += rhs.x, y += rhs.y; }
-	inline void operator-=(Vector2D<T>& rhs) { x -= rhs.x, y -= rhs.y; }
-	inline void operator*=(T rhs) { x *= rhs, y *= rhs; }
-	inline void operator/=(T rhs) { x /= rhs, y /= rhs; }
+	inline Vector2D<T> operator+(const Vector2D<T>& rhs) { return {x + rhs.x, y + rhs.y}; }
+	inline Vector2D<T> operator-(const Vector2D<T>& rhs) { return {x - rhs.x, y - rhs.y}; }
+	inline Vector2D<T> operator*(const T rhs) { return {x * rhs, y * rhs}; }
+	inline Vector2D<T> operator/(const T rhs) { return {x / rhs, y / rhs}; }
+	inline void operator=(const Vector2D<T>& rhs) { x = rhs.x, y = rhs.y; }
+	inline void operator+=(const Vector2D<T>& rhs) { x += rhs.x, y += rhs.y; }
+	inline void operator-=(const Vector2D<T>& rhs) { x -= rhs.x, y -= rhs.y; }
+	inline void operator*=(const T rhs) { x *= rhs, y *= rhs; }
+	inline void operator/=(const T rhs) { x /= rhs, y /= rhs; }
 
 	void normalize() {
 		// If the vector is null do not normalize it. (Divide by 0 error)

@@ -14,8 +14,9 @@ class Actor : public CollisionRect {
   public:
 	ActorType type = ActorType::NONE;
 	C2D_Sprite sprite;
+	Vector2Df velocity = {0.0f, 0.0f};
 
-	Actor(f32 x = 0.0f, f32 y = 0.0f, f32 w = 8.0f, f32 h = 8.0f) {
+	Actor(f32 x = 0.0f, f32 y = 0.0f, f32 w = 8.0f, f32 h = 8.0) {
 		position.x = x;
 		position.y = y;
 		width = w;
@@ -28,8 +29,13 @@ class Actor : public CollisionRect {
 		sprite.params.pos.x = position.x;
 		sprite.params.pos.y = position.y;
 		C2D_DrawSprite(&sprite);
-		if (show_collision)
+		if (show_collision) {
 			debug_draw_collision();
+			C2D_DrawLine(
+				position.x + width, position.y + height, C2D_Color32f(0.0f, 0.0f, 1.0f, 0.0f),
+				position.x + width + velocity.x * 32.0f, position.y + height + velocity.y * 32.0f,
+				C2D_Color32f(1, 0, 0, 1), 1, 0);
+		}
 	}
 
 	Actor* detect_actor();
@@ -42,9 +48,9 @@ class Enemy : public Actor {
 	using Actor::Actor;
 
 	void logic() {
-		Vector2Df direction = {actors[0]->position.x - position.x, actors[0]->position.y - position.y};
-		direction.normalize();
-		direction *= 0.5f;
-		position += direction;
+		velocity = {actors[0]->position.x - position.x, actors[0]->position.y - position.y};
+		velocity.normalize();
+		velocity *= 0.5f;
+		position += velocity;
 	}
 };

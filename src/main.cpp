@@ -1,6 +1,5 @@
 #include <3ds.h>
 #include <citro2d.h>
-#include <cmath>
 #include <stdio.h>
 
 #include "actors/actor.hpp"
